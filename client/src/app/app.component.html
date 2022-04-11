@@ -1,0 +1,84 @@
+<div class="center-content" *ngIf="!authUser">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Login/Register</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group>
+          <mat-tab label="Login">
+              <mat-form-field class="example-full-width">
+                  <mat-label>Username</mat-label>
+                  <input matInput placeholder="Username" #log_username type="text" required />
+              </mat-form-field>
+  
+              <mat-form-field class="example-full-width">
+                  <mat-label>Password</mat-label>
+                  <input matInput placeholder="Password" #log_password type="password" required />
+              </mat-form-field>
+
+              <button mat-button color="primary" (click)="login(log_username.value, log_password.value)">Login</button>
+          </mat-tab>
+          <mat-tab label="Register">
+              <mat-form-field class="example-full-width">
+                  <mat-label>Username</mat-label>
+                  <input matInput placeholder="Username" #reg_username type="text" required />
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="Username" #first_name type="text" required />
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="Username" #last_name type="text" required />
+          </mat-form-field>
+  
+              <mat-form-field class="example-full-width">
+                  <mat-label>Password</mat-label>
+                  <input matInput placeholder="Password" #reg_password type="password" required />
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Username" #email type="text" required />
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Type (admin | customer)</mat-label>
+              <input matInput placeholder="Username" #type type="text" required />
+          </mat-form-field>
+
+              <button mat-button color="primary" (click)="register(reg_username.value, first_name.value, last_name.value, reg_password.value, email.value, type.value)">Register</button>
+          </mat-tab>
+        </mat-tab-group>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>
+<div *ngIf="authUser" style="background-color: antiquewhite; padding: 20px; display: flex; justify-content: space-between; margin-bottom: 20px;">
+  <h3>Hello, {{authUser?.username}}! You are <b>{{authUser?.type}}</b></h3>
+  <button style="width: 100px;" (click)="logout()" mat-button>Log Out</button>
+</div>
+<div style="display: flex; justify-content: space-between;">
+  <app-listinglist *ngIf="authUser" style="width: 100%;"></app-listinglist>
+  <app-newlistingform *ngIf="authUser && authUser.type == 'admin'" style="width: 30%;"></app-newlistingform>
+</div>
+<div *ngIf="authUser">
+  <h1 style="margin-top: 20px;">My Bookings</h1>
+  <mat-grid-list cols="2" rowHeight="250px" gutterSize="20">
+    <mat-grid-tile class="gridItem" *ngFor="let booking of bookings">
+        <mat-card class="listingCard">
+          <mat-card-subtitle>Listing from: {{getListingById(booking.listing_id).username}}</mat-card-subtitle>
+          <mat-card-title>{{getListingById(booking.listing_id).listing_title}}</mat-card-title>
+          <mat-card-content>
+            <p><b>{{getListingById(booking.listing_id).city}}, {{getListingById(booking.listing_id).street}}, {{getListingById(booking.listing_id).postal_code}}</b></p>
+            <p class="crop">{{booking.description}}</p>
+            <p><b>FROM: {{booking.booking_start}}</b></p>
+            <p><b>TO: {{booking.booking_end}}</b></p>
+          </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,19 @@
+<ng-container>
+  <h1>All Listings</h1>
+  <mat-grid-list cols="3" rowHeight="250px" gutterSize="20">
+      <mat-grid-tile class="gridItem" *ngFor="let listing of listings">
+          <mat-card class="listingCard">
+            <mat-card-subtitle>Listing from: {{listing.username}}</mat-card-subtitle>
+            <mat-card-title>{{listing.listing_title}}</mat-card-title>
+            <mat-card-content>
+              <p><b>{{listing.city}}, {{listing.street}}, {{listing.postal_code}}</b></p>
+              <p class="crop">{{listing.description}}</p>
+              <p><b>${{listing.price}}/night</b></p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>BOOK A NIGHT</button>
+            </mat-card-actions>
+          </mat-card>
+      </mat-grid-tile>
+  </mat-grid-list>
+</ng-container>

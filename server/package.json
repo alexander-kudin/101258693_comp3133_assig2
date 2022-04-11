@@ -1,0 +1,22 @@
+{
+  "name": "101258693_comp3133_assig1",
+  "version": "1.0.0",
+  "description": "Assignment 2 – GrapthQL AirBnb API Clone ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "nodemon src/index.js"
+  },
+  "author": "Alexander Kudin",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/merge": "^8.2.3",
+    "@wiicamp/graphql-merge-resolvers": "^2.1.2",
+    "apollo-server-express": "^3.6.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.3",
+    "nodemon": "^2.0.15"
+  }
+}
